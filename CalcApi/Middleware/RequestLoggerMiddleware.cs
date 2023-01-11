@@ -19,7 +19,7 @@ public class RequestLoggerMiddleware : IMiddleware
 
         var log = new RequestLog
         {
-            Recieved = DateTime.Now,
+            RecievedUtc = DateTime.UtcNow,
             Details = request.Request.Path
         };
         
