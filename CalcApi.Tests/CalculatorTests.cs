@@ -1,5 +1,6 @@
 using CalcApi.Core;
 using FluentAssertions;
+using OneOf;
 
 namespace CalcApi.Tests;
 
@@ -15,7 +16,7 @@ public class CalculatorTests
     {
         var actual = _sut.Add(first, second);
         
-        actual.Should().Be(expected);
+        RequireSuccesfulCalculation(actual).Should().Be(expected);
     }
 
     [Theory]
@@ -35,7 +36,7 @@ public class CalculatorTests
 
         var actual = _sut.Add(max, 1);
         
-        Assert.Fail("Implement proper erroring.");
+        RequireFailedCalculation(actual);
     }
 
     [Fact]
@@ -44,8 +45,8 @@ public class CalculatorTests
         var min = int.MinValue;
 
         var actual = _sut.Subtract(min, 1);
-        
-        Assert.Fail("Implement proper erroring.");
+
+        RequireFailedCalculation(actual);
     }
 
     [Fact]
@@ -55,7 +56,7 @@ public class CalculatorTests
         
         var actual = _sut.Subtract(firstOperand, -5);
 
-        actual.Should().BeGreaterThan(firstOperand);
+        RequireSuccesfulCalculation(actual).Should().BeGreaterThan(firstOperand);
     }
 
     [Fact]
@@ -63,6 +64,9 @@ public class CalculatorTests
     {
         var actual = _sut.Divide(1, 0);
 
-        actual.Should().BeNull();
+        RequireFailedCalculation(actual);
     }
+
+    private int RequireSuccesfulCalculation(OneOf<int, Error> monad) => monad.Match(x => x, y => throw new Exception());
+    private Error RequireFailedCalculation(OneOf<int, Error> monad) => monad.Match(x => throw new Exception(), y => y);
 }
