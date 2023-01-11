@@ -15,7 +15,7 @@ public class CalculationController : ControllerBase
         _calculator = calculator;
     }
     
-    [HttpGet("add/{x:int},{y:int}")]
+    [HttpGet("add")]
     public IActionResult Add(int x, int y)
     {
         var result = _calculator.Add(x, y);
@@ -23,7 +23,7 @@ public class CalculationController : ControllerBase
         return ToActionResult(result);
     }
     
-    [HttpGet("subtract/{x:int},{y:int}")]
+    [HttpGet("subtract")]
     public IActionResult Subtract(int x, int y)
     {
         var result = _calculator.Subtract(x, y);
@@ -31,7 +31,7 @@ public class CalculationController : ControllerBase
         return ToActionResult(result);
     }
     
-    [HttpGet("multiply/{x:int},{y:int}")]
+    [HttpGet("multiply")]
     public IActionResult Multiply(int x, int y)
     {
         var result = _calculator.Subtract(x, y);
@@ -39,7 +39,7 @@ public class CalculationController : ControllerBase
         return ToActionResult(result);
     }
     
-    [HttpGet("divide/{x:int},{y:int}")]
+    [HttpGet("divide")]
     public IActionResult Divide(int x, int y)
     {
         var result = _calculator.Divide(x, y);
