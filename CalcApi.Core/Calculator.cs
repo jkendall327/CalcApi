@@ -5,7 +5,7 @@ public interface ICalculator
     int Add(int x, int y);
     int Subtract(int x, int y);
     int Multiply(int x, int y);
-    int Divide(int x, int y);
+    int? Divide(int x, int y);
 }
 
 public class Calculator : ICalculator
@@ -25,7 +25,7 @@ public class Calculator : ICalculator
         throw new NotImplementedException();
     }
 
-    public int Divide(int x, int y)
+    public int? Divide(int x, int y)
     {
         throw new NotImplementedException();
     }
