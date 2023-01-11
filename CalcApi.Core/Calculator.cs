@@ -6,7 +6,7 @@ using Result = OneOf<int, Error>;
 
 /// <summary>
 /// Represents a simple calculator over the <see cref="Int32"/> type,
-/// accounting for integer overflow and division-by-zero errors.
+/// returning an error-object in case of integer overflow or division-by-zero.
 /// </summary>
 public interface ICalculator
 {
