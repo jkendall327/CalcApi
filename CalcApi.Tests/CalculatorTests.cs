@@ -50,7 +50,7 @@ public class CalculatorTests
     }
 
     [Fact]
-    public void Subtraction_OfNegativeValue_ShouldReturnPositive()
+    public void Subtraction_OfNegativeValue_ShouldIncreaseValue()
     {
         var firstOperand = 3;
         
@@ -60,13 +60,13 @@ public class CalculatorTests
     }
 
     [Fact]
-    public void DivisionByZero_Should_ReturnNull()
+    public void DivisionByZero_Should_ReturnError()
     {
         var actual = _sut.Divide(1, 0);
 
         RequireFailedCalculation(actual);
     }
 
-    private int RequireSuccesfulCalculation(OneOf<int, Error> monad) => monad.Match(x => x, y => throw new Exception());
-    private Error RequireFailedCalculation(OneOf<int, Error> monad) => monad.Match(x => throw new Exception(), y => y);
+    private int RequireSuccesfulCalculation(OneOf<int, Error> monad) => monad.Match(x => x, _ => throw new());
+    private Error RequireFailedCalculation(OneOf<int, Error> monad) => monad.Match(_ => throw new(), y => y);
 }
