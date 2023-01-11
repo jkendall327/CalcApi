@@ -17,8 +17,10 @@ public class CalculationController : ControllerBase
     }
 
     [HttpGet(Name = "Add")]
-    public IActionResult Get()
+    public IActionResult Get(int x, int y)
     {
-        throw new NotImplementedException();
+        var result = _calculator.Add(x, y);
+        
+        return result.Match(i => Ok(i), error => Problem(error.Message));
     }
 }
