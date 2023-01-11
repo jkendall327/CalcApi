@@ -20,17 +20,47 @@ public class Calculator : ICalculator
 {
     public Result Add(int x, int y)
     {
-        throw new NotImplementedException();
+        checked
+        {
+            try
+            {
+                return x + y;
+            }
+            catch (OverflowException)
+            {
+                return new Error { Message = "Calculation resulted in integer overflow." };
+            }
+        }
     }
 
     public Result Subtract(int x, int y)
     {
-        throw new NotImplementedException();
+        checked
+        {
+            try
+            {
+                return x - y;
+            }
+            catch (OverflowException)
+            {
+                return new Error { Message = "Calculation resulted in integer underflow." };
+            }
+        }
     }
 
     public Result Multiply(int x, int y)
     {
-        throw new NotImplementedException();
+        checked
+        {
+            try
+            {
+                return x * y;
+            }
+            catch (OverflowException)
+            {
+                return new Error { Message = "Calculation resulted in integer overflow." };
+            }
+        }
     }
 
     public Result Divide(int x, int y)
