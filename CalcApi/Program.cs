@@ -8,6 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<RequestLoggerMiddleware>();
 builder.Services.AddCalculator();
 
 var connectionString = builder.Configuration.GetConnectionString(nameof(CalculatorContext));

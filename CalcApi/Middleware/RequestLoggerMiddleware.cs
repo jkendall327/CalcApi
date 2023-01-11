@@ -15,10 +15,15 @@ public class RequestLoggerMiddleware : IMiddleware
 
     public async Task InvokeAsync(HttpContext request, RequestDelegate next)
     {
-        _logger.LogDebug("Logging request...");
+        _logger.LogDebug("Request at path {Path}", request.Request.Path);
+
+        var log = new RequestLog
+        {
+            Recieved = DateTime.Now,
+            Details = request.Request.Path
+        };
         
-        // AddAsync adds no benefit.
-        // _context.RequestLogs.Add();
+        _context.RequestLogs.Add(log);
 
         await _context.SaveChangesAsync();
 
