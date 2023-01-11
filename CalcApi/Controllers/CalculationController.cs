@@ -34,7 +34,7 @@ public class CalculationController : ControllerBase
     [HttpGet("multiply")]
     public IActionResult Multiply(int x, int y)
     {
-        var result = _calculator.Subtract(x, y);
+        var result = _calculator.Multiply(x, y);
         
         return ToActionResult(result);
     }
