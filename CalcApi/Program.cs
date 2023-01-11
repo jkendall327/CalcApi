@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<RequestLoggerMiddleware>();
 builder.Services.AddCalculator();
 
+// Configure EF.
 var connectionString = builder.Configuration.GetConnectionString(nameof(CalculatorContext));
 
 builder.Services.AddDbContext<CalculatorContext>(c =>
@@ -19,6 +20,13 @@ builder.Services.AddDbContext<CalculatorContext>(c =>
 });
 
 var app = builder.Build();
+
+// Ensure migrations are applied.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CalculatorContext>();
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
