@@ -2,33 +2,44 @@
 
 namespace CalcApi.Core;
 
+using Result = OneOf<int, Error>;
+
+/// <summary>
+/// Represents a simple calculator over the <see cref="Int32"/> type,
+/// accounting for integer overflow and division-by-zero errors.
+/// </summary>
 public interface ICalculator
 {
-    OneOf<int, Error> Add(int x, int y);
-    OneOf<int, Error> Subtract(int x, int y);
-    OneOf<int, Error> Multiply(int x, int y);
-    OneOf<int, Error> Divide(int x, int y);
+    Result Add(int x, int y);
+    Result Subtract(int x, int y);
+    Result Multiply(int x, int y);
+    Result Divide(int x, int y);
 }
 
 public class Calculator : ICalculator
 {
-    public OneOf<int, Error> Add(int x, int y)
+    public Result Add(int x, int y)
     {
         throw new NotImplementedException();
     }
 
-    public OneOf<int, Error> Subtract(int x, int y)
+    public Result Subtract(int x, int y)
     {
         throw new NotImplementedException();
     }
 
-    public OneOf<int, Error> Multiply(int x, int y)
+    public Result Multiply(int x, int y)
     {
         throw new NotImplementedException();
     }
 
-    public OneOf<int, Error> Divide(int x, int y)
+    public Result Divide(int x, int y)
     {
-        throw new NotImplementedException();
+        if (y is 0)
+        {
+            return new Error { Message = "Division by zero is undefined." };
+        }
+
+        return x / y;
     }
 }
